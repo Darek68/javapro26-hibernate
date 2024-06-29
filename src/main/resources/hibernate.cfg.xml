@@ -6,8 +6,8 @@
 	<session-factory>
 		<!-- Database connection properties - Driver, URL, user, password -->
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
-		<property name="hibernate.default_schema">homework26</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5436/postgres</property>
+		<!-- <property name="hibernate.default_schema">homework26</property> -->
 		<!--	<property name="hibernate.default_schema" value="homework26"/> -->
             <property name="hibernate.connection.username">postgres</property>
             <property name="hibernate.connection.password">352800</property>

@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+// import lombok.extern.slf4j.Slf4j;
+// @Slf4j
 
 import java.util.ArrayList;
 import java.util.List;
