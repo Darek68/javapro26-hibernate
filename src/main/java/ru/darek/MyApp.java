@@ -8,9 +8,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 public class MyApp {
@@ -39,16 +39,20 @@ public class MyApp {
         products.add(new Product("wine", 46.35));
         products.add(new Product("water", 11.28));
         clients.get(0).addProduct(products.get(0));
-        clients.get(0).getProducts().add(products.get(2));
+      //  clients.get(0).getProducts().add(products.get(2));
+//        products.get(0).getClients().add(clients.get(0));
+//        products.get(2).getClients().add(clients.get(0));
+        LOGGER.fatal("client0 before commit: " + clients.get(0));
         try (Session session = sessionFactory.getCurrentSession()) {
             Transaction transaction = session.beginTransaction();
 //            session.persist(client);
 //            session.persist(product);
             session.persist(clients.get(0));
             session.persist(products.get(0));
-            session.persist(products.get(2));
+         //   session.persist(products.get(2));
             //  T merged = session.merge(entity);
             transaction.commit();
+            LOGGER.fatal("client0 after commit: " + clients.get(0));
             //  return merged;
         }
         l = clients.get(0).getId();
