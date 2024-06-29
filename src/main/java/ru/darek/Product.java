@@ -3,6 +3,7 @@ package ru.darek;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,11 +23,12 @@ public class Product {
     @JoinTable(name = "product_client",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "client_id"))
-
     private Set<Client> clients;
 
     public Product(String name, Double price) {
         this.name = name;
         this.price = price;
+        this.clients = new HashSet<>();
     }
+
 }

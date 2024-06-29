@@ -7,13 +7,13 @@
 		<!-- Database connection properties - Driver, URL, user, password -->
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
-		<property name="hibernate.default_schema">"homework26"</property>
+		<property name="hibernate.default_schema">homework26</property>
 		<!--	<property name="hibernate.default_schema" value="homework26"/> -->
             <property name="hibernate.connection.username">postgres</property>
             <property name="hibernate.connection.password">352800</property>
 
-            <property name="hhibernate.hbm2ddl.auto">"create"</property>
-            <property name="hibernate.show_sql">"true"</property>
+            <property name="hibernate.hbm2ddl.auto">create</property>
+            <property name="hibernate.show_sql">true</property>
 
             <!-- org.hibernate.HibernateException: No CurrentSessionContext configured! -->
 		<property name="hibernate.current_session_context_class">thread</property>
