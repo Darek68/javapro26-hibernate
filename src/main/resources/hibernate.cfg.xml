@@ -19,7 +19,7 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 
 		<!-- Mapping with model class containing annotations -->
-		<mapping class="ru.darek.Client"/>
-		<mapping class="ru.darek.Product"/>
+		<mapping class="ru.darek.entity.Client"/>
+		<mapping class="ru.darek.entity.Product"/>
 	</session-factory>
 </hibernate-configuration>

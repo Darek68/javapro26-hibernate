@@ -1,4 +1,4 @@
-package ru.darek;
+package ru.darek.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "GOODS")
+//@Table(name = "GOODS")
 @Data
 @NoArgsConstructor
 public class Product {
@@ -20,9 +20,9 @@ public class Product {
     private Double price;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "product_client",
+ /*   @JoinTable(name = "product_client",
             joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "client_id"))
+            inverseJoinColumns = @JoinColumn(name = "client_id")) */
     private Set<Client> clients;
 
     public Product(String name, Double price) {
@@ -31,4 +31,11 @@ public class Product {
         this.clients = new HashSet<>();
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

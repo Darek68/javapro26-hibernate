@@ -23,6 +23,7 @@ def jupiterPlatformSuiteVersion = "1.10.2"
 
 dependencies {
     implementation("commons-logging:commons-logging:${commonsLoggingVersion}")
+
     implementation("org.hibernate:hibernate-core:${hibernateVersion}")
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
