@@ -19,10 +19,10 @@ public class Client {
 
     //    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "clients", fetch = FetchType.LAZY)
 //    private Set<Product> products = new HashSet<>();
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "client_product",
-            joinColumns = {@JoinColumn(name = "client_id")},
-            inverseJoinColumns = {@JoinColumn(name = "product_id")})
+    @ManyToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
+//    @JoinTable(name = "client_product",
+//            joinColumns = {@JoinColumn(name = "clients_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "products_id")})
     private Set<Product> products = new HashSet<>();
 
     public Client(String name) {

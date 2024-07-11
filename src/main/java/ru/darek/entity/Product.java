@@ -19,7 +19,7 @@ public class Product {
 
     private Double price;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
  /*   @JoinTable(name = "product_client",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "client_id")) */

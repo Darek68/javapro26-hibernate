@@ -1,16 +1,19 @@
 package ru.darek.service;
 
+import jakarta.persistence.Query;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.NativeQuery;
 import ru.darek.MyApp;
 import ru.darek.entity.Client;
 import ru.darek.entity.Product;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -37,16 +40,6 @@ public class ShopService {
         return products;
     }
 
-    public Set<Product> getProductsByClient(Client client){
-        try (Session session = sessionFactory.getCurrentSession()) {
-            Transaction transaction = session.beginTransaction();
-            System.out.println("before " + client.getId());
-            Set<Product> products = session.get(Client.class, client.getId()).getProducts();
-            System.out.println("after " + session.get(Client.class, client.getId()));
-            transaction.commit();
-            return products;
-        }
-    }
     public Set<Product> getProductsById(int idx){
         try (Session session = sessionFactory.getCurrentSession()) {
             Transaction transaction = session.beginTransaction();
@@ -55,18 +48,54 @@ public class ShopService {
             return products;
         }
     }
-    public Set<Client> getClientsByProduct(Product product){
+    public Set<Product> getProductsById1(int idx){
         try (Session session = sessionFactory.getCurrentSession()) {
             Transaction transaction = session.beginTransaction();
-            Set<Client> clients = session.get(Product.class, product.getId()).getClients();
+
+            String SQL = "select p.* from client c, client_product cp, product p where p.id = cp.products_id and cp.client_id = c.id and c.id = :clientid";
+            NativeQuery<Product> query = session.createNativeQuery(SQL, Product.class);
+            query.setParameter("clientid", idx);
+            Set<Product> products = new HashSet<Product>(query.list());
+
+            transaction.commit();
+            return products;
+        }
+    }
+
+    public Set<Client> getClientsByProduct(int idx){
+        try (Session session = sessionFactory.getCurrentSession()) {
+            Transaction transaction = session.beginTransaction();
+            Set<Client> clients = session.get(Product.class, idx).getClients();
             transaction.commit();
             return clients;
         }
     }
-    public void deleteClient(Client client){
+    public Set<Client> getClientsByProduct1(int idx){
         try (Session session = sessionFactory.getCurrentSession()) {
             Transaction transaction = session.beginTransaction();
-            Client delClient = session.load(Client.class, client.getId());
+            String SQL = "select c.* from client c, client_product cp, product p where p.id = cp.products_id and cp.client_id = c.id and p.id = :productid";
+            NativeQuery<Client> query = session.createNativeQuery(SQL, Client.class);
+            query.setParameter("productid", idx);
+            Set<Client> clients = new HashSet<Client>(query.list());
+            transaction.commit();
+            return clients;
+        }
+    }
+
+    public void deleteClientById(int idx){
+        try (Session session = sessionFactory.getCurrentSession()) {
+            Transaction transaction = session.beginTransaction();
+            Client delClient = session.load(Client.class, idx);
+            session.delete(delClient);
+            transaction.commit();
+            transaction.commit();
+        }
+    }
+
+    public void deleteProductById(int idx){
+        try (Session session = sessionFactory.getCurrentSession()) {
+            Transaction transaction = session.beginTransaction();
+            Client delClient = session.load(Client.class, idx);
             session.delete(delClient);
             transaction.commit();
             transaction.commit();
@@ -105,42 +134,6 @@ public class ShopService {
             }
             transaction.commit();
         }
-
-
-        //  clients.get(0).getProducts().add(products.get(2));
-
-//        products.get(0).getClients().add(clients.get(0));
-//        products.get(2).getClients().add(clients.get(0));
-
-
-//        System.out.println("client0 before commit: " + clients.get(0));
-//        LOGGER.fatal("client0 before commit: " + clients.get(0));
-     /*   try (Session session = sessionFactory.getCurrentSession()) {
-            Transaction transaction = session.beginTransaction();
-//            session.persist(client);
-//            session.persist(product);
-//            session.persist(products.get(0));
-//            session.persist(products.get(2));
-            session.persist(clients.get(0));
-            session.persist(clients.get(1));
-
-            //   session.persist(products.get(2));
-            //  T merged = session.merge(entity);
-            transaction.commit();
-            System.out.println("client0 after commit: " + clients.get(0));
-            LOGGER.fatal("client0 after commit: " + clients.get(0));
-            //  return merged;
-        } */
-     /*   l = clients.get(0).getId();
-        clients.get(0);
-        try (Session session = sessionFactory.getCurrentSession()) {
-            Transaction transaction = session.beginTransaction();
-            Client bdClient = null;
-            System.out.println("bdClient before " + bdClient);
-            bdClient = session.get(Client.class, l);
-            System.out.println("bdClient after " + bdClient);
-            transaction.commit();
-        } */
     }
 
 }

@@ -21,5 +21,6 @@
 		<!-- Mapping with model class containing annotations -->
 		<mapping class="ru.darek.entity.Client"/>
 		<mapping class="ru.darek.entity.Product"/>
+
 	</session-factory>
 </hibernate-configuration>
