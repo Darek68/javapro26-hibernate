@@ -15,11 +15,6 @@ def h2DataBaseVersion = "2.2.224"
 def hibernateVersion = "6.5.2.Final"
 def lombokVersion = "1.18.32"
 def postgreSqlVersion = "42.7.3"
-def hibernateEhcacheVersion = "5.6.15.Final"
-def ehcacheVersion = "3.10.8"
-
-def jupiterPlatformVersion = "5.10.2"
-def jupiterPlatformSuiteVersion = "1.10.2"
 
 dependencies {
     implementation("commons-logging:commons-logging:${commonsLoggingVersion}")
@@ -30,6 +25,8 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql:${postgreSqlVersion}")
     implementation 'org.ehcache:ehcache:3.10.8'
     implementation 'org.hibernate.orm:hibernate-jcache:6.3.1.Final'
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
+
 }
 
 configurations {

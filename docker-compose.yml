@@ -4,7 +4,7 @@ services:
     container_name: java_db
     image: postgres:16
     ports:
-      - "5436:5432"
+      - '5436:5432'
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -14,6 +14,6 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
 volumes:
-  postgres-data: {}
+  postgres-data: { }
 # docker compose up -d java_db
 # docker-compose ps
