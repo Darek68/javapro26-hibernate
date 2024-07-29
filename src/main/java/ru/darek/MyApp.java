@@ -130,7 +130,7 @@ public class MyApp {
 
         if (opt.isPresent()) {
             Product product = opt.get();
-            productService.deleteProduct(product);
+            productService.deleteProduct(productId);
             System.out.format("Product [%d] %s удалён\n", product.getId(), product.getName());
         } else
             System.out.format("product [%d] не найден\n", productId);

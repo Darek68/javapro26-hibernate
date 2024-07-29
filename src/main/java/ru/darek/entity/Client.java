@@ -43,4 +43,10 @@ public class Client {
         // TODO не забываем обновлять сами продукты
         products.forEach(product -> product.addClient(this));
     }
+    public void removeProduct(Product product) {
+        if (product != null) {
+            products.remove(product);
+            product.removeClient(this);
+        }
+    }
 }

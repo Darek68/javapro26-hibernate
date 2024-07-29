@@ -5,8 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import ru.darek.entity.Client;
 import ru.darek.entity.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,9 +31,15 @@ public final class ProductService {
         }
     }
 
-    public void deleteProduct(Product product) {
+    public void deleteProduct(long productId) {
         try (Session session = sessionFactory.openSession()) {
+            Product product = session.get(Product.class, productId);
+
+            for (Client client : new ArrayList<>(product.getClients()))
+                client.removeProduct(product);
+
             Transaction transaction = session.beginTransaction();
+
             session.remove(product);
             transaction.commit();
         }

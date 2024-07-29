@@ -52,4 +52,8 @@ public class Product {
 
         clients.add(client);
     }
+    public void removeClient(Client client) {
+        if (client != null)
+            clients.remove(client);
+    }
 }
